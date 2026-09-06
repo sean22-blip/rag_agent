@@ -1,4 +1,4 @@
-from uagents import Agent
+from uagents import Agent, Context
 import asyncio
 loop = asyncio.new_event_loop();
 asyncio.set_event_loop(loop);
