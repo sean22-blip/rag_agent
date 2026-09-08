@@ -1,4 +1,5 @@
 from uagents import Agent, Bureau, Context, Model, Protocol
+from uagents.setup import fund_agent_if_low
 import asyncio
 loop = asyncio.new_event_loop();
 asyncio.set_event_loop(loop);
@@ -8,12 +9,17 @@ asyncio.set_event_loop(loop);
 # charles will try to reach all agents supporting the protocol
 alice = Agent(name="alice", seed="alice recovery phrase", port=8000, endpoint=["http://127.0.0.1:8000/submit"])
 #alice seem to not have enough fund
+fund_agent_if_low(alice)
 bob = Agent(name="bob", seed="bob recovery phrase", port=8001, endpoint=["http://127.0.0.1:8001/submit"])
 #bob also seem to not have enough fund
+fund_agent_if_low(bob)
 charles = Agent(name="charles", seed="charles recovery phrase", port=8002, endpoint=["http://127.0.0.1:8002/submit"])
 #charles also seem to not have enough fund
+fund_agent_if_low(charles)
+print("alice:", alice.wallet.address())
+print("bob:", bob.wallet.address())
+print("charles:", charles.wallet.address())
 
- 
 class BroadcastExampleRequest(Model):
     pass
 class BroadcastExampleResponse(Model):
